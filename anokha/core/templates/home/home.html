@@ -1,0 +1,118 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid p-0">
+    <!-- Video Section -->
+    <div class="video-section">
+        <div class="position-relative" style="height: 70vh; overflow: hidden; width: 100%; border-radius: 0; box-shadow: none;">
+            <video autoplay muted loop class="w-100 h-100" style="object-fit: cover;">
+                <source src="{% static 'video/video1.mp4' %}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <!-- Slogan Section -->
+    <div class="content">
+        <h1 class="slogan">Discover the Charm of Vintage</h1>
+        <p class="text2">Exclusive collections from a bygone era!</p>
+    </div>
+</div>
+
+<!-- Categories Section -->
+{% for category in categories %}
+    <div class="category">
+        <h3><a class="text3" href="{% url 'category_items' category.id %}">{{ category.name }}</a></h3>
+        <p class="text4">{{ category.description }}</p>
+
+        {% if category.video %}
+            <div class="video-container">
+                <video autoplay muted loop class="category-video">
+                    <source src="{{ category.video.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        {% else %}
+            <p>No video available for this category.</p>
+        {% endif %}
+    </div>
+{% endfor %}
+
+<style>
+/* General Styling */
+h1 {
+    margin-top: 20px;
+    font-family: "Zefani Stencil";
+    font-weight: bold;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.72);
+}
+
+.text2 {
+    font-family: "Elianto Regular";
+    text-align: center;
+    margin-top: 5px;
+}
+
+.text3 {
+    font-family: "Cafecoco";
+    font-size: 2em;
+}
+
+.text4 {
+    font-family: "Elianto Regular";
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: rgba(0, 0, 0, 0.72);
+    text-decoration: none;
+}
+
+a:hover {
+    color: black; /* Hover color */
+}
+
+/* Category Container */
+.category {
+    padding:40px 15px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Video Container */
+.video-container {
+    height:70vh;
+    width: 100%; /* Full width */
+    overflow: hidden; /* Prevent overflow */
+    margin: 20px 0; /* Spacing between sections */
+    display:center;
+    justify-content: center;
+    align-items: center;
+    border-radius:10px;
+}
+
+/* Category Video Styling */
+.category-video {
+    width: 100%; /* Stretches the video to the full width of the container */
+    height: 100%; /* Maintains aspect ratio */
+    object-fit: cover; /* Ensures the video fills the container without blank spaces */
+    {% comment %} display: block; /* Removes inline gap */
+    background-color: #000; /* Optional fallback for browsers without videos */ {% endcomment %}
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .category-video {
+        width: 100%;
+    }
+}
+
+/* Adjust Body Margin for Navbar */
+body {
+    margin-top: 55px; /* Adjust this value to match your navbar height */
+}
+</style>
+{% endblock %}

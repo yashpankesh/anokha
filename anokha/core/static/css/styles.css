@@ -1,0 +1,144 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Elianto Regular';
+
+}
+
+
+
+.navbar {
+background-color: rgba(0, 0, 0, 0.55);
+transition: background-color 0.3s ease-in-out;
+}
+
+.navbar .navbar-brand{
+color: white !important;
+font-family: papyrus,fantasy;
+}
+
+.navbar .nav-link {
+    color: white !important;
+    font-family: 'Elianto Regular';
+}
+
+.navbar .nav-link:hover {
+color: #f1c40f !important;
+}
+
+.navbar.sticky {
+background-color: rgba(0, 0, 0, 0.55);
+}
+
+
+/* .navbar-brand {
+font-weight: bold;
+font-size: 1.5rem;
+} */
+
+.main-frame {
+position: relative;
+height: calc(100vh - 56px);
+overflow: hidden;
+}
+
+.main-frame video {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+min-width: 100%;
+min-height: 100%;
+z-index: -1;
+filter: brightness(70%);
+}
+
+.content-overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+color: #fff;
+text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.content-overlay h1 {
+font-size: 3rem;
+margin-bottom: 0.5rem;
+}
+
+.content-overlay p {
+font-size: 1.2rem;
+margin-bottom: 1.5rem;
+}
+
+.btn-primary {
+background-color: #007bff;
+border-color: #007bff;
+font-size: 1rem;
+}
+
+.navbar-nav .nav-link {
+font-size: 1.1rem;
+margin-left: 1rem;
+}
+
+.animate-fade {
+animation: fadeIn 2s ease-in-out;
+}
+
+
+
+
+@keyframes fadeIn {
+0% { opacity: 0; }
+100% { opacity: 1; }
+}
+
+@import url(https://db.onlinewebfonts.com/c/d268148a30c0f701afdcb14b309a5b5b?family=Elianto+Regular);
+@import url(https://db.onlinewebfonts.com/c/d65f9b4e2de7b5cbf34d096643a7c442?family=Ikaros-Regular);
+@import url(https://db.onlinewebfonts.com/c/2cf6c7378def07ed80ca861450be8887?family=Cafecoco);
+
+@font-face {
+    font-family: "Elianto Regular";
+    src: url("https://db.onlinewebfonts.com/t/d268148a30c0f701afdcb14b309a5b5b.eot");
+    src: url("https://db.onlinewebfonts.com/t/d268148a30c0f701afdcb14b309a5b5b.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/d268148a30c0f701afdcb14b309a5b5b.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/d268148a30c0f701afdcb14b309a5b5b.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/d268148a30c0f701afdcb14b309a5b5b.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/d268148a30c0f701afdcb14b309a5b5b.svg#Elianto Regular")format("svg");
+}
+@font-face {
+    font-family: "Ikaros-Regular";
+    src: url("https://db.onlinewebfonts.com/t/d65f9b4e2de7b5cbf34d096643a7c442.eot");
+    src: url("https://db.onlinewebfonts.com/t/d65f9b4e2de7b5cbf34d096643a7c442.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/d65f9b4e2de7b5cbf34d096643a7c442.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/d65f9b4e2de7b5cbf34d096643a7c442.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/d65f9b4e2de7b5cbf34d096643a7c442.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/d65f9b4e2de7b5cbf34d096643a7c442.svg#Ikaros-Regular")format("svg");
+}
+
+@font-face {
+    font-family: "Cafecoco";
+    src: url("https://db.onlinewebfonts.com/t/2cf6c7378def07ed80ca861450be8887.eot");
+    src: url("https://db.onlinewebfonts.com/t/2cf6c7378def07ed80ca861450be8887.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/2cf6c7378def07ed80ca861450be8887.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/2cf6c7378def07ed80ca861450be8887.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/2cf6c7378def07ed80ca861450be8887.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/2cf6c7378def07ed80ca861450be8887.svg#Cafecoco")format("svg");
+}
+
+@font-face {
+    font-family: "Zefani Stencil";
+    src: url("https://db.onlinewebfonts.com/t/69d83e4c4f28f156ca2e5790d0e271ab.eot");
+    src: url("https://db.onlinewebfonts.com/t/69d83e4c4f28f156ca2e5790d0e271ab.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/69d83e4c4f28f156ca2e5790d0e271ab.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/69d83e4c4f28f156ca2e5790d0e271ab.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/69d83e4c4f28f156ca2e5790d0e271ab.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/69d83e4c4f28f156ca2e5790d0e271ab.svg#Zefani Stencil")format("svg");
+}

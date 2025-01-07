@@ -1,0 +1,39 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Checkout</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                {% if item.image %}
+                    <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.name }}</h5>
+                    <p class="card-text">{{ item.description }}</p>
+                    <p class="card-text"><strong>Price: </strong> ₹{{ item.price }}</p>
+                    <form method="POST" action="{% url 'payment_success' %}">
+                        <script src="https://checkout.razorpay.com/v1/checkout.js"
+                                data-key="{{ razorpay_key_id }}"
+                                data-amount="{{ razorpay_amount }}"
+                                data-currency="{{ currency }}"
+                                data-order_id="{{ razorpay_order_id }}"
+                                data-buttontext="Pay Now"
+                                data-name="Your Store Name"
+                                data-description="Payment for {{ item.name }}"
+                                data-image="https://your-logo-url.com/logo.png"
+                                data-prefill.name="Your Name"
+                                data-prefill.email="email@example.com"
+                                data-prefill.contact="9999999999"
+                                data-theme.color="#528FF0">
+                        </script>
+                        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,172 @@
+
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anokha</title>
+    
+    <!-- Link to your CSS file -->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Body content -->
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Visamo{% endblock %}</title>
+    
+    <!-- Link to Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Anokha</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/hotels">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <!-- Cart icon with dynamic count -->
+                        <a class="nav-link position-relative" href="/cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                {{ request.session.cart|length|default:0 }}
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container-fluid p-0">
+            <!-- Video Section -->
+            <div class="video-section">
+                <div class="position-relative" style="height: 70vh; overflow: hidden; width: 100%; border-radius: 0; box-shadow: none;">
+                    <video autoplay muted loop class="w-100 h-100" style="object-fit: cover;">
+                        <source src="{% static 'video/video1.mp4' %}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+        
+        {% for category in categories %}
+            <div class="category">
+                <h3><a href="{% url 'category_items' category.id %}">{{ category.name }}</a></h3>
+                <p>{{ category.description }}</p>
+                
+                {% if category.image %}
+                    <img src="{{ category.image.url }}" alt="{{ category.name }}" class="category-image">
+                {% elif category.video %}
+                    <div class="video-container">
+                        <video controls class="category-video">
+                            <source src="{{ category.video.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                {% else %}
+                    <p>No media available</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+        
+        
+        <style>
+
+            .nav-link .badge {
+                font-size: 12px;
+                padding: 4px 6px;
+                color: white;
+                background-color: red;
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+            }
+            
+            /* Style for category container */
+        .category {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        /* Image style for categories */
+        .category-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Container for videos */
+        .video-container {
+            width: 100%;
+            max-width: 800px;  /* Limit the width to avoid overly wide videos */
+            margin: 20px auto;  /* Center the video container */
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            overflow: hidden;  /* Prevent overflow of video outside the container */
+        }
+        
+        /* Video styling */
+        .category-video {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;  /* Optional: gives a rounded corner to the video */
+            background-color: #000;  /* Optional: a fallback background color */
+        }
+        
+        /* Responsive styling for smaller screens */
+        @media (max-width: 768px) {
+            .category-video {
+                max-width: 100%;
+                height: auto;
+            }
+        
+            .category-image {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+        
+            /* Add padding to the top to ensure video starts below navbar */
+            body {
+                margin-top: 55px; /* Adjust this value to match your navbar height */
+            }
+           
+        </style>
+       
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
