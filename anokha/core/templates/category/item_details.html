@@ -1,0 +1,88 @@
+{% extends 'home/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center" style="font-family: 'Cafecoco'; font-size:60px;">{{ item.name }}</h1>
+    <div class="row">
+        <div class="col-md-6">
+            {% if item.image %}
+                <img src="{{ item.image.url }}" class="vintage-img" alt="{{ item.name }}">
+            {% else %}
+                <img src="{% static 'images/placeholder.jpg' %}" class="vintage-img" alt="No image available">
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <p><strong>Price:</strong> ₹{{ item.price }}</p>
+            <p><strong>Condition:</strong> {{ item.condition }}</p>
+            <p><strong>Brand:</strong> {{ item.brand }}</p>
+            <p><strong>Year of Manufacture:</strong> {{ item.year_of_manufacture }}</p>
+            <p><strong>Owner:</strong> {{ item.owner_name }}</p>
+            <p><strong>Contact:</strong> {{ item.owner_phone_number }}</p>
+            <p><strong>Description:</strong> {{ item.description }}</p>
+            <div class="d-flex mt-4">
+                <form method="post" action="{% url 'add_to_cart' item.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-vintage-primary">Add to Cart</button>
+                </form>
+                <form method="post" action="{% url 'buy_now' item.id %}" class="ms-3">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-vintage-success">Buy Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .container {
+        margin-top: 60px;
+    }
+
+    h1 {
+        font-family: 'Cafecoco', serif;
+        color: #333;
+    }
+
+    .vintage-img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        object-fit: contain;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        border-radius: 5px;
+        text-transform: uppercase;
+    }
+
+    .btn-vintage-primary {
+        background-color: #8e735b; /* Muted brown */
+        border: none;
+        color: #fff;
+    }
+
+    .btn-vintage-primary:hover {
+        background-color: #6f5b45; /* Darker brown */
+    }
+
+    .btn-vintage-success {
+        background-color: #6b8e23; /* Vintage green */
+        border: none;
+        color: #fff;
+    }
+
+    .btn-vintage-success:hover {
+        background-color: #556b2f; /* Darker vintage green */
+    }
+
+    .ms-3 {
+        margin-left: 1rem;
+    }
+</style>
+{% endblock %}

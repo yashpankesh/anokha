@@ -33,12 +33,19 @@ def home(request):
     return render(request, 'home/home.html', {'categories': categories})
 
 # View to display items of a particular category
-def category_items(request, category_id):
+# def category_items(request, category_id):
+#     category = get_object_or_404(Category, id=category_id)
+#     items = category.items.all()
+#     return render(request, 'category/category_items.html', {'category': category, 'items': items})
+
+def category_items_view(request, category_id):
     category = get_object_or_404(Category, id=category_id)
-    items = category.items.all()
+    items = category.items.all()  # Related name from the ForeignKey
     return render(request, 'category/category_items.html', {'category': category, 'items': items})
 
-
+def item_details_view(request, item_id):
+    item = get_object_or_404(Item, id=item_id)
+    return render(request, 'category/item_details.html', {'item': item})
 # add_to_cart
 
 from decimal import Decimal
@@ -109,6 +116,12 @@ def cart_view(request):
     return render(request, 'category/cart.html', {'items': items, 'total_price': total_price})
 
 
+def update_cart_quantity(request, item_id):
+    # Logic to update the quantity of an item in the cart
+    quantity = request.POST.get('quantity')
+    # Update the item in the cart with the new quantity
+    return redirect('cart')
+
 
 
 # Buy Now
@@ -151,7 +164,18 @@ def payment_success(request):
     # Handle successful payment here
     return render(request, 'category/payment_success.html')
 
+from .models import Blog
 
+def blog_list(request):
+    blogs = Blog.objects.order_by('-published_date')
+    return render(request, 'blog/blog_list.html', {'blogs': blogs})
+
+def blog_detail(request, blog_id):
+    blog = get_object_or_404(Blog, id=blog_id)
+    return render(request, 'blog/blog_detail.html', {'blog': blog})
+
+def about(request):
+    return render(request, 'home/about.html')
 
 # Add item to cart
 # def add_to_cart(request, item_id):

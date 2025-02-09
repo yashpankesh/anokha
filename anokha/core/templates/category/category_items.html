@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container">
-    <h1 class="text-center" style="font-family: 'Cafecoco'; font-size:60px; ">{{ category.name }}</h1>
+    <h1 class="text-center" style="font-family: 'Cafecoco'; font-size:60px;">{{ category.name }}</h1>
     <p class="text-center" style="font-family: 'Elianto Regular';">{{ category.description }}</p>
 
     <div class="row">
@@ -11,23 +11,18 @@
                 <div class="d-flex align-items-center vintage-card">
                     <div class="item-image">
                         {% if item.image %}
-                            <img src="{{ item.image.url }}" class="vintage-img" alt="{{ item.name }}">
+                            <a href="{% url 'item_details' item.id %}">
+                                <img src="{{ item.image.url }}" class="vintage-img" alt="{{ item.name }}">
+                            </a>
                         {% endif %}
                     </div>
                     <div class="item-content">
                         <h5 class="vintage-title">{{ item.name }}</h5>
-                        <p class="vintage-description">{{ item.description }}</p>
+                        <p class="vintage-description">{{ item.description|truncatechars:100 }}</p>
                         <p class="card-text"><strong>Price: </strong> ₹{{ item.price }}</p>
-                        <div class="d-flex justify-content-start">
-                            <form method="post" action="{% url 'add_to_cart' item.id %}">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-vintage-primary">Add to Cart</button>
-                            </form>
-                            <form method="post" action="{% url 'buy_now' item.id %}">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-vintage-success">Buy Now</button>
-                            </form>
-                        </div>
+                        <p class="card-text"><strong>Owner: </strong> {{ item.owner_name }}</p>
+                        <p class="card-text"><strong>Contact: </strong> {{ item.owner_contact }}</p>
+                        <a href="{% url 'item_details' item.id %}" class="btn btn-vintage-primary">View Details</a>
                     </div>
                 </div>
             </div>
@@ -40,19 +35,18 @@
 </div>
 
 <style>
-    .container{  
-        margin-top:60px;
+    .container {
+        margin-top: 60px;
     }
-
 
     .vintage-card {
         display: flex;
         flex-direction: row;
         box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
         border-radius: 10px;
-        background-color:rgb(255, 255, 255); /* Antique white */
+        background-color: rgb(255, 255, 255);
         padding: 15px;
-        height:400px;
+        height: 400px;
     }
 
     .item-image {
@@ -73,7 +67,7 @@
 
     .vintage-title {
         font-family: 'Playfair Display', serif;
-        color:rgb(0, 0, 0); /* Dark brown for vintage */
+        color: rgb(0, 0, 0);
         font-size: 20px;
         margin-bottom: 10px;
     }
@@ -81,7 +75,7 @@
     .vintage-description {
         font-family: 'Roboto', sans-serif;
         font-size: 15px;
-        color: #6c757d; /* Muted gray */
+        color: #6c757d;
         margin-bottom: 15px;
     }
 
@@ -95,21 +89,12 @@
     }
 
     .btn-vintage-primary {
-        background-color: #8e735b; /* Muted brown */
+        background-color: #8e735b;
         border: none;
     }
 
     .btn-vintage-primary:hover {
-        background-color: #6f5b45; /* Darker brown */
-    }
-
-    .btn-vintage-success {
-        background-color: #6b8e23; /* Vintage green */
-        border: none;
-    }
-
-    .btn-vintage-success:hover {
-        background-color: #556b2f; /* Darker vintage green */
+        background-color: #6f5b45;
     }
 </style>
 

@@ -1,0 +1,61 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.card {
+    background: #fff;
+    border-radius: 10px;
+    max-width: 900px;
+    margin: auto;
+}
+
+.blog-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+}
+
+.blog-image {
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.author-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
+.related-title {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.related-title:hover {
+    color: #007bff;
+}
+
+.btn-outline-primary {
+    border-color: #007bff;
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Social Media Icons */
+.social-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}

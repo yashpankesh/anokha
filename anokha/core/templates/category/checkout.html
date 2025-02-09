@@ -5,29 +5,30 @@
 <div class="container mt-5">
     <h1 class="text-center">Checkout</h1>
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
+        <div class="col-md-8">
+            <div class="card flex-row">
                 {% if item.image %}
-                    <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}">
+                    <img src="{{ item.image.url }}" class="card-img-left" alt="{{ item.name }}">
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ item.name }}</h5>
                     <p class="card-text">{{ item.description }}</p>
                     <p class="card-text"><strong>Price: </strong> ₹{{ item.price }}</p>
                     <form method="POST" action="{% url 'payment_success' %}">
-                        <script src="https://checkout.razorpay.com/v1/checkout.js"
-                                data-key="{{ razorpay_key_id }}"
-                                data-amount="{{ razorpay_amount }}"
-                                data-currency="{{ currency }}"
-                                data-order_id="{{ razorpay_order_id }}"
-                                data-buttontext="Pay Now"
-                                data-name="Your Store Name"
-                                data-description="Payment for {{ item.name }}"
-                                data-image="https://your-logo-url.com/logo.png"
-                                data-prefill.name="Your Name"
-                                data-prefill.email="email@example.com"
-                                data-prefill.contact="9999999999"
-                                data-theme.color="#528FF0">
+                        <script 
+                            src="https://checkout.razorpay.com/v1/checkout.js"
+                            data-key="{{ razorpay_key_id }}"
+                            data-amount="{{ razorpay_amount }}"
+                            data-currency="{{ currency }}"
+                            data-order_id="{{ razorpay_order_id }}"
+                            data-buttontext="Pay Now"
+                            data-name="Your Store Name"
+                            data-description="Payment for {{ item.name }}"
+                            data-image="https://your-logo-url.com/logo.png"
+                            data-prefill.name="Your Name"
+                            data-prefill.email="email@example.com"
+                            data-prefill.contact="9999999999"
+                            data-theme.color="#528FF0">
                         </script>
                         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
                     </form>
@@ -36,4 +37,99 @@
         </div>
     </div>
 </div>
+
+<!-- CSS for Left-Image and Right-Details Layout -->
+<style>
+/* Base Layout Styling */
+body {
+    font-family: 'Roboto', sans-serif; 
+    background-color: #f4f7fa; 
+    color: #333;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Card Styling for Flex Layout */
+.card {
+    display: flex; /* Use Flexbox */
+    flex-direction: row; /* Images on the left, content on the right */
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: #fff;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Image Styling */
+.card-img-left {
+    width: 40%; /* Left side takes 40% of the card */
+    object-fit: cover; /* Ensure the image fills the area proportionally */
+    height: auto; /* Let height adjust dynamically */
+    max-height: 250px; /* Ensure a consistent max height */
+    border-right: 1px solid #ddd; /* Add a divider between image and text */
+    background-color: #f8f9fa; /* Neutral background for empty spaces */
+    padding: 10px; /* Add some breathing space */
+}
+
+/* Card Body Styling */
+.card-body {
+    width: 60%; /* Right side takes 60% of the card */
+    padding: 30px 20px;
+    text-align: left;
+    color: #555;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically center the content */
+}
+
+.card-title {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.card-text strong {
+    font-weight: 700;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .card {
+        flex-direction: column; /* Stack the image and details vertically */
+    }
+
+    .card-img-left {
+        width: 100%; /* Image takes full width on smaller screens */
+        max-height: 200px; /* Adjust max height for mobile */
+        border-right: none;
+        border-bottom: 1px solid #ddd; /* Add a bottom divider */
+    }
+
+    .card-body {
+        width: 100%; /* Details also take full width */
+        padding: 20px; /* Reduce padding for smaller screens */
+    }
+}
+</style>
 {% endblock %}
